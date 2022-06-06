@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add team</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:include="user-nav"></div>
+<div th:if="${#fields.hasErrors('team')}" th:errors="*{team}" class="alert alert-danger" role="alert"></div>
+<div class="container my-5">
+    <form action="#"
+          th:action="@{add-team}"
+          th:object="${team}"
+          method="post">
+        <div class="mb-3">
+            <div th:unless="${#fields.hasErrors('name')}">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Name">
+            </div>
+            <div th:if="${#fields.hasErrors('name')}">
+                <label for="nameE" class="form-label">Name</label>
+                <input type="text" th:value="*{name}" class="form-control is-invalid"
+                       th:field="*{name}" id="nameE" placeholder="Name">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}"></div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div th:unless="${#fields.hasErrors('city')}">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" th:field="*{city}" id="city" placeholder="City">
+            </div>
+            <div th:if="${#fields.hasErrors('city')}">
+                <label for="cityE" class="form-label">City</label>
+                <input type="text" th:value="*{city}" class="form-control is-invalid"
+                       th:field="*{city}" id="cityE" placeholder="City">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('city')}"
+                     th:errors="*{city}"></div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div th:unless="${#fields.hasErrors('country')}">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" class="form-control" th:field="*{country}" id="country" placeholder="Country">
+            </div>
+            <div th:if="${#fields.hasErrors('country')}">
+                <label for="countryE" class="form-label">Country</label>
+                <input type="text" th:value="*{country}" class="form-control is-invalid"
+                       th:field="*{country}" id="countryE" placeholder="Country">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('country')}"
+                     th:errors="*{country}"></div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Add team">
+    </form>
+</div>
+<footer th:insert="footer"></footer>
+</body>
+</html>

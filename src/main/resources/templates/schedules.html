@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage schedules</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="user-nav"></div>
+<div th:switch="${games}" class="container my-2">
+    <h2 th:case="null">No games yet!</h2>
+    <div th:case="*">
+        <h2>Games</h2>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>First team</th>
+                <th>Second team</th>
+                <th>Date</th>
+                <th>First team score</th>
+                <th>Second team score</th>
+                <th>Enter result</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${games}">
+                <td th:text="${game.firstTeam.getName()}"></td>
+                <td th:text="${game.secondTeam.getName()}"></td>
+                <td th:text="${{game.getDate()}}"></td>
+                <td th:text="${game.gameResult.getFirstTeamScore()}"></td>
+                <td th:text="${game.gameResult.getSecondTeamScore()}"></td>
+                <td><a th:if="${game.date.isBefore(#temporals.createNow())}"
+                       th:href="@{/manage/schedules/enter-result/{id}(id=${game.id})}"
+                       class="btn btn-primary">Enter result</a></td>
+                <td><a th:if="${game.date.isAfter(#temporals.createNow())}"
+                       th:href="@{/manage/schedules/edit/{id}(id=${game.id})}" class="btn btn-secondary">Edit</a></td>
+                <td><a th:href="@{/manage/schedules/delete/{id}(id=${game.id})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:insert="footer"></footer>
+</body>
+</html>

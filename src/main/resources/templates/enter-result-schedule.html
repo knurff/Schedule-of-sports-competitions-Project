@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:include="user-nav"></div>
+<div class="container my-5">
+    <form action="#"
+          th:action="@{/manage/schedules/enter-result/{id}(id=${game.id})}"
+          th:object="${game}"
+          method="post">
+        <div class="mb-3">
+            <label for="firstTeam" class="form-label">First team</label>
+            <input type="text" th:field="*{firstTeam.name}" id="firstTeam" class="form-control" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="firstTeam" class="form-label">Second team</label>
+            <input type="text" th:field="*{secondTeam.name}" id="secondTeam" class="form-control" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="datetime-local" th:field="*{date}" id="date" class="form-control" readonly>
+        </div>
+        <div class="mb-3">
+            <div th:unless="${#fields.hasErrors('gameResult.firstTeamScore')}">
+                <label for="firstTeamScore" class="form-label">First team score</label>
+                <input type="number" th:field="*{gameResult.firstTeamScore}" class="form-control"
+                       id="firstTeamScore">
+            </div>
+            <div th:if="${#fields.hasErrors('gameResult.firstTeamScore')}">
+                <label for="firstTeamScoreE" class="form-label">First team score</label>
+                <input type="number" th:field="*{gameResult.firstTeamScore}"
+                       th:value="*{gameResult.firstTeamScore}" class="form-control is-invalid"
+                       id="firstTeamScoreE">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('gameResult.firstTeamScore')}"
+                     th:errors="*{gameResult.firstTeamScore}"></div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div th:unless="${#fields.hasErrors('gameResult.secondTeamScore')}">
+                <label for="secondTeamScore" class="form-label">First team score</label>
+                <input type="number" th:field="*{gameResult.secondTeamScore}" class="form-control"
+                       id="secondTeamScore">
+            </div>
+            <div th:if="${#fields.hasErrors('gameResult.secondTeamScore')}">
+                <label for="secondTeamScoreE" class="form-label">First team score</label>
+                <input type="number" th:field="*{gameResult.secondTeamScore}"
+                       th:value="*{gameResult.secondTeamScore}" class="form-control is-invalid"
+                       id="secondTeamScoreE">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('gameResult.secondTeamScore')}"
+                     th:errors="*{gameResult.secondTeamScore}"></div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enter result</button>
+    </form>
+</div>
+<footer th:insert="footer"></footer>
+</body>
+</html>

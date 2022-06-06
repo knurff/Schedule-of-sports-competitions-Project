@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "mainPage.path",
+      "type": "java.lang.String",
+      "description": "Description for mainPage.path."
+  }
+] }

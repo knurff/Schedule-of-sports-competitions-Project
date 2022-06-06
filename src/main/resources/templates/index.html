@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedules</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div th:include="user-nav"></div>
+</div>
+<div sec:authorize="isAnonymous()">
+    <div th:include="default-nav"></div>
+</div>
+<div th:switch="${games}" class="container my-2">
+    <h2 th:case="null">No games yet!</h2>
+    <div th:case="*">
+        <h2>Games</h2>
+        <div>
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>First team</th>
+                    <th>Second team</th>
+                    <th>Date</th>
+                    <th>First team score</th>
+                    <th>Second team score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game : ${games}">
+                    <td th:text="${game.firstTeam.getName()}"></td>
+                    <td th:text="${game.secondTeam.getName()}"></td>
+                    <td th:text="${{game.getDate()}}"></td>
+                    <td th:text="${game.gameResult.getFirstTeamScore()}"></td>
+                    <td th:text="${game.gameResult.getSecondTeamScore()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:insert="footer"></footer>
+</body>
+</html>
