@@ -76,6 +76,9 @@ public class GameService {
     public void checkEnteringResult(Game game) {
         if (game != null) {
             Game gameFromDB = getById(game.getId());
+            if (game.getDate().isAfter(LocalDateTime.now())
+                    || gameFromDB.getDate().isAfter(LocalDateTime.now()))
+                throw new IllegalStateException("Entering result for future game!");
             if (!game.getFirstTeam().getName().equals(gameFromDB.getFirstTeam().getName())
                     || !game.getSecondTeam().getName().equals(gameFromDB.getSecondTeam().getName())
                     || !game.getDate().equals(gameFromDB.getDate()))
