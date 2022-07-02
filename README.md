@@ -30,7 +30,7 @@ Default user view:
 Admin manage panel view:
 ![agmin page](https://github.com/knurff/Schedule-of-sports-competitions-Project/blob/main/readme_images/admin_view.png?raw=true)
 
-
+Try to add game:
 ![add page](https://github.com/knurff/Schedule-of-sports-competitions-Project/blob/main/readme_images/adding_with_validation.png?raw=true)
 
 
