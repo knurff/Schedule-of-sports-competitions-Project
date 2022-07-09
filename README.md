@@ -20,5 +20,5 @@ This project has used:
 * Spring MVC to implement MVC pattern;
 *  Spring JPA and Hibernate to store data in PostgreSQL database; 
 *  Hibernate for default and custom Bean Validation; 
-* Spring Security to authorize admins and maybe implement a large and flexible role system in the future ;
+* Spring Security to authorize admins and maybe implement a large and flexible role system in the future;
 * Thymeleaf and Bootstrap for view.
